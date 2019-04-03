@@ -149,5 +149,64 @@ Humanoid.prototype.greet = function() {
 
   // Stretch task:
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
-  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
+  // * Give the Hero and Villains different methods that could be used to remove health points from objects
+  //   which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+
+const Villian = function(param4){
+  Humanoid.call(this, param4)
+}
+
+Villian.prototype.takeLife = function(theFighter) {
+  return (theFighter.healthPoints >= 5)? theFighter.healthPoints -= 5: `${theFighter} has died!`
+}
+
+const Hero = function(param5){
+  Humanoid.call(this, param5)
+}
+
+Hero.prototype.giveLife = function() {
+  this.healthPoints =this.healthPoints + 10;
+  return this.healthPoints
+}
+
+Hero.prototype.takeLifeAway = function(theFighter) {
+  return (theFighter.healthPoints >= 5)?theFighter.healthPoints -= 5: `${theFighter} has died!`
+}
+
+
+const evilPolitician = new Villian({
+  healthPoints: 20,
+  weapons: ['Taxes', 'Jail'],
+  team: 'Nobodys',
+  language: 'lies',
+  name: 'The Liar',
+  createdAT: new Date()
+});
+
+
+ const theLittleMan = new Hero({
+   healthPoints: 15,
+   weapons:['Books', 'Friends'],
+   team: 'Everybody',
+   language: 'The Truth',
+   createdAT: new Date()
+ });
+
+console.log(theLittleMan.healthPoints);
+
+console.log(evilPolitician.takeLife(theLittleMan));
+console.log(theLittleMan.healthPoints);
+console.log(theLittleMan.giveLife(theLittleMan));
+console.log(evilPolitician.takeLife(theLittleMan));
+console.log(evilPolitician.takeLife(theLittleMan));
+console.log(evilPolitician.takeLife(theLittleMan));
+console.log(theLittleMan.giveLife(theLittleMan));
+console.log(theLittleMan.giveLife(theLittleMan));
+console.log(theLittleMan.giveLife(theLittleMan));
+console.log(theLittleMan.takeLifeAway(evilPolitician));
+console.log(theLittleMan.takeLifeAway(evilPolitician));
+console.log(theLittleMan.takeLifeAway(evilPolitician));
+console.log(theLittleMan.takeLifeAway(evilPolitician));
+console.log(theLittleMan.takeLifeAway(evilPolitician));
