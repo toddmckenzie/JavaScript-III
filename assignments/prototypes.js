@@ -21,10 +21,10 @@
   * dimensions (These represent the character's size in the video game)
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
-const GameObject = function(createdAt, name, dimensions) {
-  this.createdAt = createdAt,
-  this.name = name,
-  this.dimensions = dimensions
+const GameObject = function(foobar) {
+  this.createdAt = foobar.createdAt,
+  this.name = foobar.name,
+  this.dimensions = foobar.dimensions
 }
 
 GameObject.prototype.destroy = function() {
@@ -37,16 +37,16 @@ GameObject.prototype.destroy = function() {
   * should inherit destroy() from GameObject's prototype
 */
 
-const CharacterStats = function(healthPoints) {
-  this.healthPoints = healthPoints,
-  GameObject.call(this, createdAt, name, dimensions)
+const CharacterStats = function(param2) {
+  this.healthPoints = param2.healthPoints,
+  GameObject.call(this, param2)
 }
+CharacterStats.prototype = Object.create(GameObject.prototype);
 
 CharacterStats.prototype.takeDamage = function() {
-  return `<object name> took damage.`
+  return `${this.name} took damage.`
 }
 
-CharacterStats.prototype = Object.create(GameObject.prototype);
                 //should inherit destroy() from GameObject's prototype
 
 /*
@@ -58,18 +58,19 @@ CharacterStats.prototype = Object.create(GameObject.prototype);
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
- const Humanoid = function(team, weapons, language) {
-   this.team = team,
-   this.weapons = weapons,
-   this.language = language,
-   CharacterStats.call(this, healthPoints)
+const Humanoid = function(param3) {
+   this.team = param3.team,
+   this.weapons = param3.weapons,
+   this.language = param3.language,
+   CharacterStats.call(this, param3)
  }
+Humanoid.prototype = Object.create(CharacterStats.prototype);
 
- Humanoid.prototype.greet = function() {
-   return '<object name> offers a greeting in <object language>.'
- }
+Humanoid.prototype.greet = function() {
+   return `${this.name} offers a greeting in ${this.language}.`
+ };
 
-//Humanoid.prototype = Object.create(CharacterStats.prototype);
+
 //Humanoid.prototype = Object.create(GameObject.protoype);
  // should inherit takeDamage() from CharacterStats
                 //   should inherit destroy() from GameObject through CharacterStats
@@ -132,6 +133,7 @@ CharacterStats.prototype = Object.create(GameObject.prototype);
     ],
     language: 'Elvish',
   });
+
 
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
